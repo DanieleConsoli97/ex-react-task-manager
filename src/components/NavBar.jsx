@@ -7,8 +7,10 @@ function NavBar() {
                 Task List
                 
             </NavLink>
-            <NavLink to={"/addTask"} >
-               Add Task
+            <NavLink 
+            to={"/addTask"} 
+            >
+            Add Task
             </NavLink>
         </nav>
     );
