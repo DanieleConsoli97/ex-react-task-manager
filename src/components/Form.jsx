@@ -11,14 +11,14 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
         }
         return <p style={{ backgroundColor: "lightgreen" }}>Il nome della task è valido.</p>
     }
-
+    
     return (
         <form action="submit" onSubmit={(e) => {
             e.preventDefault();
             onClickFunction()
         }}>
             <label htmlFor="">Nome della Task</label>
-            <input onChange={handleChange} type="text" />
+            <input onChange={handleChange} type="text" value={taskName} />
             {validateName(taskName)}
             <label htmlFor="">Descrizione</label>
             <textarea ref={textRef} />
