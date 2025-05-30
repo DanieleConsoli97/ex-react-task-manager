@@ -3,10 +3,10 @@ import { useGlobalContext } from "../context/GlobalContext"
 import TaskRow from "../components/TaskRow"
 
 const TaskList = () => {
-  const value = useGlobalContext()
-  const { Task} = value
-
   
+  const value = useGlobalContext()
+  const { Task } = value
+
 
   const TaskRowMemo = memo(TaskRow)
 
@@ -27,7 +27,8 @@ const TaskList = () => {
         <tbody>
           {Task && Task?.map((task) => {
             return <TaskRowMemo key={task.id} task={task} />
-          })}
+          })
+          }
         </tbody>
       </table>
     </>

@@ -1,9 +1,6 @@
-
-
 const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) => {
 
     const symbols = `!@#$%^&*()-_=+[]{}|;:'\\",.<>?/~`
-
 
     const validateName = (title) => {
         if (!title || title.trim() === "") {
@@ -14,6 +11,7 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
         }
         return <p style={{ backgroundColor: "lightgreen" }}>Il nome della task è valido.</p>
     }
+
     return (
         <form action="submit" onSubmit={(e) => {
             e.preventDefault();
@@ -25,7 +23,7 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
             <label htmlFor="">Descrizione</label>
             <textarea ref={textRef} />
             <label htmlFor="">Stato</label>
-            <select ref={selectRef} defaultValue={"To do"} name="" id="">
+            <select ref={selectRef} defaultValue={"To do"} name="">
                 <option className="Todo" value="To do">To do</option>
                 <option className="Doing" value="Doing">Doing</option>
                 <option className="Done" value="Done">Done</option>
