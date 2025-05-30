@@ -1,8 +1,8 @@
 import { useGlobalContext } from "../context/GlobalContext";
-import { useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import Form from "../components/Form";
 function TaskList() {
-
+  const {addTask}=useGlobalContext()
   const [taskName, setNameTask] = useState("")
   const [task, setTask] = useState({})
   const Select = useRef()
@@ -10,23 +10,21 @@ function TaskList() {
 
   const handleChange = (e) => {
     setNameTask(e.target.value);
-    console.log(taskName);
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     setTask(() => {
-      const task = { name: taskName, description: textArea.current.value, state: Select.current.value }
+      const task = { title: taskName, description: textArea.current.value, status: Select.current.value }
       console.log("Task submitted:", task)
       return task
-    }
-    );
+    })
+    
+    addTask(task)
   }
   return (
     <>
       {
-        task && <p>Task Name: {task.name}</p>
+        task && <p>Task Name: {task.title}</p>
       }
       <Form taskName={taskName} handleChange={handleChange} onClickFunction={handleSubmit} selectRef={Select} textRef={textArea} />
     </>

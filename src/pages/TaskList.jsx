@@ -25,7 +25,7 @@ const TaskList = () => {
           </tr>
         </thead>
         <tbody>
-          {Task && Task.map((task) => {
+          {Task && Task?.map((task) => {
             return <TaskRowMemo key={task.id} task={task} />
           })}
         </tbody>
