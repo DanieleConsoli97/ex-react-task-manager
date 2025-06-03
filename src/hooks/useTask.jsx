@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
-const useTask = () => {
+import { useNavigate } from "react-router-dom";
 
+const useTask = () => {
+    const navigate=useNavigate()
   const BASE_URL = import.meta.env.VITE_BASE_URL_SERVER;
 
     const [Task, SetTask] = useState([])
@@ -62,7 +64,41 @@ const useTask = () => {
         return false;
     }
 
-    const removeTask = () => { }
+    const removeTask = async (id) => {
+        try {
+
+            const response = await fetch(`${BASE_URL}/tasks/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            const responseData = await response.json();
+
+            console.log(responseData)
+
+            if (responseData.success) {
+                alert("task Eliminata")
+                fetchData()
+                navigate ("/")
+                return true
+            }
+
+            
+
+        } catch (error) {
+            alert("Error remove task: " + error.message)
+            throw new Error("Error remove task: " + error.message);
+            
+        }
+        return false;
+    }
+    
 
     const updateTask = () => { }
 

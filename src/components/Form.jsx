@@ -1,7 +1,10 @@
+//NOTE - "Componente Form per l'aggiunta di nuove task"
 const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) => {
 
-    const symbols = `!@#$%^&*()-_=+[]{}|;:'\\",.<>?/~`
+    //NOTE - "Simboli non consentiti nel nome della task"
+    const symbols = `!@#$%^&*()-_=+[]{}|;:'\\",.\<>?/~`
 
+    //NOTE - "Funzione di validazione per il nome della task"
     const validateName = (title) => {
         if (!title || title.trim() === "") {
             return <p style={{ backgroundColor: "lightcoral" }}>Il nome della task non può essere vuoto</p>
