@@ -6,12 +6,21 @@ import Modal from "../components/Modal"
 const TaskDetail = () => {
     const { id } = useParams()
     const value = useGlobalContext()
-    const { Task,removeTask } = value
+    const { Task, removeTask, showModal, setShowModal } = value
     const singleTask = Task.find((t) => t.id === parseInt(id))
-    
+
+    const modalProps = {
+        title: "Elimina Task",
+        content: "Sei sicuro di voler eliminare definitivamente la task?",
+        show: showModal,
+        onClose: () => { setShowModal((curr) => curr = curr ? false : true) },
+        onConfirm: () =>removeTask(id) ,
+        confirmText: "Conferma ❌"
+    }
     return (
 
         <div>
+            
             {/* gestione dello stato di task */}
             {singleTask === undefined && <p>Nessuna task trovata.</p>}
             {singleTask && Task.length === 0 && <p>Nessuna task trovata</p>}
@@ -21,11 +30,16 @@ const TaskDetail = () => {
                     <p>{singleTask.description}</p>
                     <p>{singleTask.status}</p>
                     <p>{singleTask.createdAt}</p>
-                    <button onClick={()=>{removeTask(id)}}>Elimino Task</button>
+                    <button
+                        onClick={() => { setShowModal((curr) => curr = curr ? false : true) }}
+                    >Elimina Task
+                    </button>
                 </div>
             )}
+            
             {
-                <Modal></Modal>
+
+                <Modal  {...modalProps} />
             }
         </div>
     )
