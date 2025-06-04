@@ -110,7 +110,8 @@ const useTask = () => {
 
     const updateTask = async (id, obj) => {
         try {
-
+            console.log(id)
+            console.log(obj)
             const response = await fetch(`${BASE_URL}/tasks/${id}`, {
                 method: 'PUT',
                 headers: {
@@ -122,9 +123,9 @@ const useTask = () => {
                 throw new Error("Network response was not ok");
             }
             const responseData = await response.json();
-            
+
             console.log(responseData)
-            
+
             if (responseData.success) {
                 alert("task Modificata")
                 fetchData()

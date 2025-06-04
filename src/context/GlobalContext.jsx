@@ -5,7 +5,7 @@ const GlobalContext = createContext()
 
 function GlobalProvider({ children }) {
 
-    const [showModal, setShowModal] = useState(false)
+  
 
     const dataTask = useTask()
 
@@ -13,8 +13,6 @@ function GlobalProvider({ children }) {
 
     const value = {
         ...dataTask,
-        setShowModal,
-        showModal
     }
 
     return (
