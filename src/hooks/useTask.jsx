@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
 const useTask = () => {
-    const navigate=useNavigate()
-  const BASE_URL = import.meta.env.VITE_BASE_URL_SERVER;
+    const navigate = useNavigate()
+    const BASE_URL = import.meta.env.VITE_BASE_URL_SERVER;
 
     const [Task, SetTask] = useState([])
 
@@ -25,7 +25,7 @@ const useTask = () => {
     }
     useEffect(() => { fetchData() }, []);
 
-    //NOTE - fetch add, remove, update tasks
+    //FUNCTION - fetch add, remove, update tasks
 
     const addTask = async (obj) => {
 
@@ -64,6 +64,8 @@ const useTask = () => {
         return false;
     }
 
+    //FUNCTION - removeTask
+
     const removeTask = async (id) => {
         try {
 
@@ -85,23 +87,56 @@ const useTask = () => {
             if (responseData.success) {
                 alert("task Eliminata")
                 fetchData()
-                navigate ("/")
+                navigate("/")
                 return true
             }
-
-            
 
         } catch (error) {
             alert("Error remove task: " + error.message)
             throw new Error("Error remove task: " + error.message);
-            
+
         }
         return false;
     }
-    
 
-    const updateTask = () => { }
+    //FUNCTION - UpdateTask
 
+    /**
+       * Update Task.
+       * @param {number} id - id task.
+       * @param {object} obj - Il secondo numero da sommare.
+       * @returns {boolean} true/false.
+   */
+
+    const updateTask = async (id, obj) => {
+        try {
+
+            const response = await fetch(`${BASE_URL}/tasks/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const responseData = await response.json();
+            
+            console.log(responseData)
+            
+            if (responseData.success) {
+                alert("task Modificata")
+                fetchData()
+                return true
+            }
+
+        } catch (error) {
+            alert("Error Update task: " + error.message)
+            throw new Error("Error Update task: " + error.message);
+        }
+        return false;
+    }
     return {
         fetchData,
         Task,
