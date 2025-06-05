@@ -1,14 +1,57 @@
-import { memo } from "react"
+import { memo, useMemo, useState } from "react"
 import { useGlobalContext } from "../context/GlobalContext"
 import TaskRow from "../components/TaskRow"
 
 const TaskList = () => {
-  
+
   const value = useGlobalContext()
   const { Task } = value
-
-
+  const [sortBy, setSortBy] = useState("createdAt")
+  const [sortOrder, setSortOrder] = useState(1)
   const TaskRowMemo = memo(TaskRow)
+
+  const handleSort = (type) => {
+    if (sortBy === type) {
+
+      setSortOrder(prev => prev * -1)
+    } else {
+
+      setSortBy(type)
+      setSortOrder(1)
+    }
+  }
+  const sortedTask = useMemo(() => {
+
+    const copyTask = [...Task]
+
+
+    if (sortBy === "name") {
+      return copyTask.sort((a, b) => sortOrder * a.title.localeCompare(b.title))
+    }
+
+    if (sortBy === "state") {
+      console.log("stato")
+      const statusOrder = {
+        'To do': 0,
+        'Doing': 1,
+        'Done': 2
+      };
+
+      const orderObb = copyTask.sort((a, b) => sortOrder * (statusOrder[a.status] - statusOrder[b.status]))
+
+      return orderObb
+    }
+
+    if (sortBy === "createdAt") {
+
+      const orderObb = copyTask.sort((a, b) => sortOrder * (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()))
+
+      return orderObb
+    }
+
+    return copyTask
+
+  }, [Task, sortBy, sortOrder])
 
   return (
     <>
@@ -19,13 +62,14 @@ const TaskList = () => {
       <table>
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Stato</th>
-            <th>Data di Creazione</th>
+            <th><button onClick={() => handleSort("name")}>Nome</button></th>
+            <th><button onClick={() => handleSort("state")}>Stato</button></th>
+            <th><button onClick={() => handleSort("createdAt")}>Data di Creazione</button></th>
+
           </tr>
         </thead>
         <tbody>
-          {Task && Task?.map((task) => {
+          {Task && sortedTask?.map((task) => {
             return <TaskRowMemo key={task.id} task={task} />
           })
           }
