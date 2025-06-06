@@ -3,6 +3,7 @@ import { useGlobalContext } from "../context/GlobalContext"
 import { useParams } from "react-router-dom"
 import Modal from "../components/Modal"
 import EditTaskModal from "../components/EditTaskModal"
+import dayjs from "dayjs"
 
 const TaskDetail = () => {
 
@@ -41,7 +42,7 @@ const TaskDetail = () => {
                     <p> {singleTask.title}</p>
                     <p>{singleTask.description}</p>
                     <p>{singleTask.status}</p>
-                    <p>{singleTask.createdAt}</p>
+                    <p>{dayjs(singleTask.createdAt).format('DD/MM/YYYY')}</p>
                     <button
                         onClick={() => { setShowModal((curr) => curr = curr ? false : true) }}
                     >Elimina Task
