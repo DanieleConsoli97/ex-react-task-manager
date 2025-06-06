@@ -39,7 +39,7 @@ const TaskList = () => {
     }
   }
 
-  const debounceUsecall = useCallback(debouncefunc((e)=>handleChange(e),300),[])
+  const debounceUsecall = useCallback(debouncefunc((e) => handleChange(e), 300), [])
 
   const sortedTask = useMemo(() => {
 
@@ -51,7 +51,6 @@ const TaskList = () => {
     }
 
     if (sortBy === "state") {
-      console.log("stato")
       const statusOrder = {
         'To do': 0,
         'Doing': 1,
@@ -81,25 +80,33 @@ const TaskList = () => {
       {Task === null && ("nessuna task trovata")}
       {Task === undefined && <p>Loading...</p>}
       {Task && Task.length === 0 && <p>Nessuna task trovata</p>}
-      <div className="">
-      <label htmlFor="">Cerca la tua task <FileSearch /></label>
-      <input onChange={debounceUsecall} type="text" />
-      <table>
-        <thead>
-          <tr>
-            <th><button onClick={() => handleSort("name")}>Nome <Dock /></button> </th>
-            <th><button onClick={() => handleSort("state")}>Stato <ListTree /></button></th>
-            <th><button onClick={() => handleSort("createdAt")}>Data di Creazione<FileClock /></button></th>
-
-          </tr>
-        </thead>
-        <tbody>
-          {Task && sortedTask?.filter((t) => t.title.includes(searchQuery)).map((task) => {
-            return <TaskRowMemo key={task.id} task={task} />
-          })
-          }
-        </tbody>
-      </table>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-8">
+            <label className="py-3 fs-4" htmlFor="">Cerca la tua task <FileSearch /></label>
+            <input onChange={debounceUsecall} type="text" />
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          
+          <div className="col-8 ">
+            <table className="table w-100">
+              <thead>
+                <tr>
+                  <th><button className="btn btn-secondary w-100" onClick={() => handleSort("name")}>Nome Task <Dock /></button> </th>
+                  <th><button className="btn btn-secondary w-100" onClick={() => handleSort("state")}>Stato <ListTree /></button></th>
+                  <th><button className="btn btn-secondary w-100" onClick={() => handleSort("createdAt")}>Data di Creazione<FileClock /></button></th>
+                </tr>
+              </thead>
+              <tbody>
+                {Task && sortedTask?.filter((t) => t.title.includes(searchQuery)).map((task) => {
+                  return <TaskRowMemo key={task.id} task={task} />
+                })
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </>
   )

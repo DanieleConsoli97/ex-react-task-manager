@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 function NavBar() {
 
     return (
-        <nav className="navbar navbar-expand-lg bg-dark nav-underline nav-fill p-4" data-bs-theme="dark">
+        <nav className="navbar navbar-expand bg-dark nav-underline nav-fill p-4" data-bs-theme="dark">
             <div className="container-fluid">
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav">

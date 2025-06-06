@@ -37,17 +37,25 @@ const EditTaskModal = (props) => {
             onClose()
         }
         }>
-            <label htmlFor="">Nome Task <Dock /></label>
-            <input onChange={(e) => setTitle(() => e.target.value)} value={title} type="text" />
-            <label htmlFor="">Descrizione <FileText /></label>
-            <textarea onChange={(e) => setDescription(() => e.target.value)} value={description} name="" id="">
-            </textarea>
-            <label htmlFor="">Stato Task <ListTree /></label>
-            <select onChange={(e) => setStatus(() => e.target.value)} value={status} name="" id="">
-                <option value="To do">To do</option>
-                <option value="Doing">Doing</option>
-                <option value="Done">Done</option>
-            </select>
+            <div>
+                <div>
+                    <label htmlFor="">Nome Task <Dock /></label>
+                    <input onChange={(e) => setTitle(() => e.target.value)} value={title} type="text" />
+                </div>
+                <div>
+                    <label htmlFor="">Descrizione <FileText /></label>
+                    <textarea onChange={(e) => setDescription(() => e.target.value)} value={description} name="" id="">
+                    </textarea>
+                </div>
+                <div>
+                    <label htmlFor="">Stato Task <ListTree /></label>
+                    <select onChange={(e) => setStatus(() => e.target.value)} value={status} name="" id="">
+                        <option value="To do">To do</option>
+                        <option value="Doing">Doing</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
+            </div>
         </form>
     </>)
 
@@ -61,14 +69,14 @@ const EditTaskModal = (props) => {
         confirmText: (
             <>
                 <span>Conferma</span>
-                <FileCheck2 /> 
+                <FileCheck2 />
             </>
         )
     }
 
     return (
         <>
-            <button onClick={onClose}> Modifica Task <FilePenLine /></button>
+            <button className="btn btn-secondary ms-2" onClick={onClose}> Modifica Task <FilePenLine /></button>
 
 
             {show && (

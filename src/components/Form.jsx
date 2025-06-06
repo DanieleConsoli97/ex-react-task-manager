@@ -1,3 +1,5 @@
+import { Dock, FilePlus2, FileSearch, ListTree, MessageSquareDiff } from "lucide-react"
+
 //NOTE - "Componente Form per l'aggiunta di nuove task"
 const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) => {
 
@@ -7,31 +9,39 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
     //NOTE - "Funzione di validazione per il nome della task"
     const validateName = (title) => {
         if (!title || title.trim() === "") {
-            return <p style={{ backgroundColor: "lightcoral" }}>Il nome della task non può essere vuoto</p>
+            return <p className="bg-danger text-center rounded fs-4">Il nome della task non può essere vuoto</p>
         }
         if (title.split("").some((letter) => symbols.includes(letter))) {
-            return <p style={{ backgroundColor: "lightcoral" }}>Il nome della task non può contenere simboli speciali.</p>
+            return <p className="bg-danger text-center rounded fs-4">Il nome della task non può contenere simboli speciali.</p>
         }
-        return <p style={{ backgroundColor: "lightgreen" }}>Il nome della task è valido.</p>
+        return <p className="bg-success text-center rounded fs-4">Il nome della task è valido.</p>
     }
-    
+
     return (
-        <form action="submit" onSubmit={(e) => {
+        <form className="my-5" action="submit" onSubmit={(e) => {
             e.preventDefault();
             onClickFunction()
         }}>
-            <label htmlFor="">Nome della Task</label>
-            <input onChange={handleChange} type="text" value={taskName} />
-            {validateName(taskName)}
-            <label htmlFor="">Descrizione</label>
-            <textarea ref={textRef} />
-            <label htmlFor="">Stato</label>
-            <select ref={selectRef} defaultValue={"To do"} name="">
-                <option className="Todo" value="To do">To do</option>
-                <option className="Doing" value="Doing">Doing</option>
-                <option className="Done" value="Done">Done</option>
-            </select>
-            <button type="submit">Aggiungi</button>
+            <div className="mb-3 text-center fs-3">
+                <label className="form-label " htmlFor="">Nome della Task <Dock /></label>
+                <input className="form-control fs-4 text-center" onChange={handleChange} type="text" value={taskName} />
+                {validateName(taskName)}
+            </div>
+
+            <div className="mb-3 text-center fs-3">
+                <label className="form-label " htmlFor="">Descrizione <MessageSquareDiff /></label>
+                <textarea className="form-control fs-4 text-center" ref={textRef} />
+            </div>
+            <div className="mb-3 text-center fs-3">
+                <label className="form-label" htmlFor="">Stato <ListTree /></label>
+                <select className="form-control text-center fs-4" ref={selectRef} defaultValue={"To do"} name="">
+                    <option className="bg-danger" value="To do">To do</option>
+                    <option className="bg-warning" value="Doing">Doing</option>
+                    <option className="bg-success" value="Done">Done</option>
+                </select>
+                <button className="btn btn-secondary mt-4 fs-3" type="submit">Aggiungi Task <FilePlus2 /></button>
+            </div>
+
         </form>
     )
 }
