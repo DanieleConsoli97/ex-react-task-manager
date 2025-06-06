@@ -83,12 +83,17 @@ const TaskList = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-8">
-            <label className="py-3 fs-4" htmlFor="">Cerca la tua task <FileSearch /></label>
-            <input onChange={debounceUsecall} type="text" />
+            <div className="row py-3">
+              <div className="col-5 ">
+                <label className="fs-3" htmlFor="">Cerca la tua task <FileSearch size={"2rem"} /></label>
+              </div>
+              <div className="col-7 align-self-center">
+                <input className="w-100" onChange={debounceUsecall} type="text" />
+              </div>
+            </div>
           </div>
         </div>
         <div className="row justify-content-center">
-          
           <div className="col-8 ">
             <table className="table w-100">
               <thead>

@@ -38,21 +38,21 @@ const EditTaskModal = (props) => {
         }
         }>
             <div>
-                <div>
-                    <label htmlFor="">Nome Task <Dock /></label>
-                    <input onChange={(e) => setTitle(() => e.target.value)} value={title} type="text" />
+                <div className="mb-3 text-center fs-3">
+                    <label className="form-label" htmlFor="">Nome Task <Dock /></label>
+                    <input className="form-control fs-4 text-center" onChange={(e) => setTitle(() => e.target.value)} value={title} type="text" />
                 </div>
                 <div>
-                    <label htmlFor="">Descrizione <FileText /></label>
-                    <textarea onChange={(e) => setDescription(() => e.target.value)} value={description} name="" id="">
+                    <label className="mb-3 text-center fs-3" htmlFor="">Descrizione <FileText /></label>
+                    <textarea className="form-control fs-4 text-center" onChange={(e) => setDescription(() => e.target.value)} value={description} name="" id="">
                     </textarea>
                 </div>
                 <div>
-                    <label htmlFor="">Stato Task <ListTree /></label>
-                    <select onChange={(e) => setStatus(() => e.target.value)} value={status} name="" id="">
-                        <option value="To do">To do</option>
-                        <option value="Doing">Doing</option>
-                        <option value="Done">Done</option>
+                    <label className="form-label " htmlFor="">Stato Task <ListTree /></label>
+                    <select className="form-control fs-4 text-center" onChange={(e) => setStatus(() => e.target.value)} value={status} name="" id="">
+                        <option className="bg-danger-subtle" value="To do">To do</option>
+                        <option className="bg-warning-subtle" value="Doing">Doing</option>
+                        <option className="bg-success-subtle" value="Done">Done</option>
                     </select>
                 </div>
             </div>

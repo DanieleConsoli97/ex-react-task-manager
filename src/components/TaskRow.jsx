@@ -9,7 +9,7 @@ const TaskRow = ({task}) => {
   const { id, title, status, createdAt } = task;
   console.log("Rendering TaskRow:", task);  
   return (
-    <tr>
+    <tr className="text-center">
         <td><Link className="text-decoration-none text-reset" to={`/Task/${id}`} >{ title }</Link></td>
         <td className={ statusClassMap[status] || "" } >{status}</td>
         <td>{ dayjs(createdAt).format('DD/MM/YYYY') }</td>

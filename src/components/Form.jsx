@@ -9,12 +9,12 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
     //NOTE - "Funzione di validazione per il nome della task"
     const validateName = (title) => {
         if (!title || title.trim() === "") {
-            return <p className="bg-danger text-center rounded fs-4">Il nome della task non può essere vuoto</p>
+            return <p className="bg-danger-subtle text-center rounded fs-4">Il nome della task non può essere vuoto</p>
         }
         if (title.split("").some((letter) => symbols.includes(letter))) {
-            return <p className="bg-danger text-center rounded fs-4">Il nome della task non può contenere simboli speciali.</p>
+            return <p className="bg-danger-subtle text-center rounded fs-4">Il nome della task non può contenere simboli speciali.</p>
         }
-        return <p className="bg-success text-center rounded fs-4">Il nome della task è valido.</p>
+        return <p className="bg-success-subtle text-center rounded fs-4">Il nome della task è valido.</p>
     }
 
     return (
@@ -35,9 +35,9 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
             <div className="mb-3 text-center fs-3">
                 <label className="form-label" htmlFor="">Stato <ListTree /></label>
                 <select className="form-control text-center fs-4" ref={selectRef} defaultValue={"To do"} name="">
-                    <option className="bg-danger" value="To do">To do</option>
-                    <option className="bg-warning" value="Doing">Doing</option>
-                    <option className="bg-success" value="Done">Done</option>
+                    <option className="bg-danger-subtle" value="To do">To do</option>
+                    <option className="bg-warning-subtle" value="Doing">Doing</option>
+                    <option className="bg-success-subtle" value="Done">Done</option>
                 </select>
                 <button className="btn btn-secondary mt-4 fs-3" type="submit">Aggiungi Task <FilePlus2 /></button>
             </div>
