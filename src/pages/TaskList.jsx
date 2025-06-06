@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from "react"
+import { memo, useCallback, useMemo, useState } from "react"
 import { useGlobalContext } from "../context/GlobalContext"
 import TaskRow from "../components/TaskRow"
 
@@ -9,6 +9,7 @@ const TaskList = () => {
   const [sortBy, setSortBy] = useState("createdAt")
   const [sortOrder, setSortOrder] = useState(1)
   const TaskRowMemo = memo(TaskRow)
+  const [searchQuery, SetSearchQuery] = useState("")
 
   const handleSort = (type) => {
     if (sortBy === type) {
@@ -20,6 +21,25 @@ const TaskList = () => {
       setSortOrder(1)
     }
   }
+
+  const handleChange = (e) => {
+
+    SetSearchQuery(() => e.target.value)
+
+  }
+
+  const debouncefunc = (callBack, delay) => {
+    let timeout
+    return (value) => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        callBack(value)
+      }, delay)
+    }
+  }
+
+  const debounceUsecall = useCallback(debouncefunc((e)=>handleChange(e),300),[])
+
   const sortedTask = useMemo(() => {
 
     const copyTask = [...Task]
@@ -53,12 +73,15 @@ const TaskList = () => {
 
   }, [Task, sortBy, sortOrder])
 
+  console.log(searchQuery)
   return (
     <>
       {/* gestione dello stato di task */}
       {Task === null && ("nessuna task trovata")}
       {Task === undefined && <p>Loading...</p>}
       {Task && Task.length === 0 && <p>Nessuna task trovata</p>}
+      <label htmlFor="">Cerca la tua task </label>
+      <input onChange={debounceUsecall} type="text" />
       <table>
         <thead>
           <tr>
@@ -69,7 +92,7 @@ const TaskList = () => {
           </tr>
         </thead>
         <tbody>
-          {Task && sortedTask?.map((task) => {
+          {Task && sortedTask?.filter((t) => t.title.includes(searchQuery)).map((task) => {
             return <TaskRowMemo key={task.id} task={task} />
           })
           }

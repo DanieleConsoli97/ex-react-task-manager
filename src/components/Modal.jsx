@@ -4,7 +4,7 @@ import ReactDOM from "react-dom"
 const Modal = (props) => {
      
     const { title, content, show, onClose =()=>{}, onConfirm, confirmText } = props
-    console.log(title)
+   
     //NOTE - evita di creare un portal anche quando show è false 
     if (!show) return null
     return (
