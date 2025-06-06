@@ -1,4 +1,5 @@
 
+import { Dock, FileCheck2, FilePenLine, FileText, ListTree } from "lucide-react";
 import Modal from "./Modal"
 
 import { useState, useEffect, useRef } from "react"
@@ -36,11 +37,12 @@ const EditTaskModal = (props) => {
             onClose()
         }
         }>
-            <label htmlFor="">Nome Task</label>
+            <label htmlFor="">Nome Task <Dock /></label>
             <input onChange={(e) => setTitle(() => e.target.value)} value={title} type="text" />
-            <label htmlFor="">Descrizione</label>
+            <label htmlFor="">Descrizione <FileText /></label>
             <textarea onChange={(e) => setDescription(() => e.target.value)} value={description} name="" id="">
             </textarea>
+            <label htmlFor="">Stato Task <ListTree /></label>
             <select onChange={(e) => setStatus(() => e.target.value)} value={status} name="" id="">
                 <option value="To do">To do</option>
                 <option value="Doing">Doing</option>
@@ -52,16 +54,21 @@ const EditTaskModal = (props) => {
 
 
     const modalProps = {
-        title: "Modifica Task",
+        title: <h1>Modifica Task <FilePenLine /> </h1>,
         content: form,
         show: true,
         onConfirm: () => formRef.current?.requestSubmit(),
-        confirmText: "Salva ✅"
+        confirmText: (
+            <>
+                <span>Conferma</span>
+                <FileCheck2 /> 
+            </>
+        )
     }
 
     return (
         <>
-            <button onClick={onClose}> Modifica Task ✏️</button>
+            <button onClick={onClose}> Modifica Task <FilePenLine /></button>
 
 
             {show && (

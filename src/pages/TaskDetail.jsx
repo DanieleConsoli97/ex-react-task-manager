@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import Modal from "../components/Modal"
 import EditTaskModal from "../components/EditTaskModal"
 import dayjs from "dayjs"
+import { FileX2 } from "lucide-react"
 
 const TaskDetail = () => {
 
@@ -20,7 +21,13 @@ const TaskDetail = () => {
         show: showModal,
         onClose: () => { setShowModal((curr) => curr = curr ? false : true) },
         onConfirm: () => removeTask(id),
-        confirmText: "Conferma ❌"
+        confirmText: (
+            <>
+            <span>Conferma <FileX2 /> </span>
+            </>
+            
+
+        )
     }
 
     const editModalTask = {
@@ -45,7 +52,7 @@ const TaskDetail = () => {
                     <p>{dayjs(singleTask.createdAt).format('DD/MM/YYYY')}</p>
                     <button
                         onClick={() => { setShowModal((curr) => curr = curr ? false : true) }}
-                    >Elimina Task
+                    >Elimina Task <FileX2 />
                     </button>
                 </div>
             )}

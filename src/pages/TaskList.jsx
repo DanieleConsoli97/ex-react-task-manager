@@ -1,6 +1,7 @@
 import { memo, useCallback, useMemo, useState } from "react"
 import { useGlobalContext } from "../context/GlobalContext"
 import TaskRow from "../components/TaskRow"
+import { Dock, FileClock, FileSearch, ListTree } from "lucide-react"
 
 const TaskList = () => {
 
@@ -80,14 +81,15 @@ const TaskList = () => {
       {Task === null && ("nessuna task trovata")}
       {Task === undefined && <p>Loading...</p>}
       {Task && Task.length === 0 && <p>Nessuna task trovata</p>}
-      <label htmlFor="">Cerca la tua task </label>
+      <div className="">
+      <label htmlFor="">Cerca la tua task <FileSearch /></label>
       <input onChange={debounceUsecall} type="text" />
       <table>
         <thead>
           <tr>
-            <th><button onClick={() => handleSort("name")}>Nome</button></th>
-            <th><button onClick={() => handleSort("state")}>Stato</button></th>
-            <th><button onClick={() => handleSort("createdAt")}>Data di Creazione</button></th>
+            <th><button onClick={() => handleSort("name")}>Nome <Dock /></button> </th>
+            <th><button onClick={() => handleSort("state")}>Stato <ListTree /></button></th>
+            <th><button onClick={() => handleSort("createdAt")}>Data di Creazione<FileClock /></button></th>
 
           </tr>
         </thead>
@@ -98,6 +100,7 @@ const TaskList = () => {
           }
         </tbody>
       </table>
+      </div>
     </>
   )
 }
