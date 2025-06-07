@@ -42,8 +42,8 @@ const TaskList = () => {
   const debounceUsecall = useCallback(debouncefunc((e) => handleChange(e), 300), [])
 
   const sortedTask = useMemo(() => {
-
-    const copyTask = [...Task]
+    if (Task) {
+const copyTask = [...Task]
 
 
     if (sortBy === "name") {
@@ -70,6 +70,8 @@ const TaskList = () => {
     }
 
     return copyTask
+    }
+    
 
   }, [Task, sortBy, sortOrder])
 
@@ -80,39 +82,41 @@ const TaskList = () => {
       {Task === null && ("nessuna task trovata")}
       {Task === undefined && <p>Loading...</p>}
       {Task && Task.length === 0 && <p>Nessuna task trovata</p>}
+      {Task && Task.length > 0 &&(
       <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-8">
-            <div className="row py-3">
-              <div className="col-5 ">
-                <label className="fs-3" htmlFor="">Cerca la tua task <FileSearch size={"2rem"} /></label>
+              <div className="row justify-content-center">
+                <div className="col-8">
+                  <div className="row py-3">
+                    <div className="col-5 ">
+                      <label className="fs-3" htmlFor="">Cerca la tua task <FileSearch size={"2rem"} /></label>
+                    </div>
+                    <div className="col-7 align-self-center">
+                      <input className="w-100" onChange={debounceUsecall} type="text" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="col-7 align-self-center">
-                <input className="w-100" onChange={debounceUsecall} type="text" />
+              <div className="row justify-content-center">
+                <div className="col-8 ">
+                  <table className="table w-100">
+                    <thead>
+                      <tr>
+                        <th><button className="btn btn-secondary w-100" onClick={() => handleSort("name")}>Nome Task <Dock /></button> </th>
+                        <th><button className="btn btn-secondary w-100" onClick={() => handleSort("state")}>Stato <ListTree /></button></th>
+                        <th><button className="btn btn-secondary w-100" onClick={() => handleSort("createdAt")}>Data di Creazione<FileClock /></button></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Task && sortedTask?.filter((t) => t.title.includes(searchQuery)).map((task) => {
+                        return <TaskRowMemo key={task.id} task={task} />
+                      })
+                      }
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="row justify-content-center">
-          <div className="col-8 ">
-            <table className="table w-100">
-              <thead>
-                <tr>
-                  <th><button className="btn btn-secondary w-100" onClick={() => handleSort("name")}>Nome Task <Dock /></button> </th>
-                  <th><button className="btn btn-secondary w-100" onClick={() => handleSort("state")}>Stato <ListTree /></button></th>
-                  <th><button className="btn btn-secondary w-100" onClick={() => handleSort("createdAt")}>Data di Creazione<FileClock /></button></th>
-                </tr>
-              </thead>
-              <tbody>
-                {Task && sortedTask?.filter((t) => t.title.includes(searchQuery)).map((task) => {
-                  return <TaskRowMemo key={task.id} task={task} />
-                })
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+            </div>)
+      }
     </>
   )
 }

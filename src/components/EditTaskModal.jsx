@@ -32,7 +32,6 @@ const EditTaskModal = (props) => {
                 description: description,
                 status: status
             }
-
             onSave(parseInt(task?.id), obj)
             onClose()
         }
@@ -62,16 +61,20 @@ const EditTaskModal = (props) => {
 
 
     const modalProps = {
-        title: <h1>Modifica Task <FilePenLine /> </h1>,
+        title: (
+            <h1 className="d-flex align-items-center justify-content-center gap-2">
+                Modifica Task <FilePenLine />
+            </h1>
+        ),
         content: form,
-        show: true,
+        show: show,
+        onClose: onClose,
         onConfirm: () => formRef.current?.requestSubmit(),
         confirmText: (
-            <>
-                <span>Conferma</span>
-                <FileCheck2 />
-            </>
-        )
+            <span className="d-flex align-items-center justify-content-center gap-2">
+                Conferma <FileCheck2 />
+            </span>
+        ),
     }
 
     return (
