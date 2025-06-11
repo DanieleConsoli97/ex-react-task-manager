@@ -2,7 +2,7 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { useRef, useState } from "react";
 import Form from "../components/Form";
 
-function TaskList() {
+function AddTask() {
   const { addTask } = useGlobalContext()
   const [taskName, setNameTask] = useState("")
   const Select = useRef()
@@ -37,4 +37,4 @@ function TaskList() {
   )
 }
 
-export default TaskList;
+export default AddTask;

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import Modal from "../components/Modal"
 import EditTaskModal from "../components/EditTaskModal"
 import dayjs from "dayjs"
-import { FileX2 } from "lucide-react"
+import { FileX2, FileX } from "lucide-react"
 
 const TaskDetail = () => {
 
@@ -59,7 +59,7 @@ const TaskDetail = () => {
                         <button
                             className="btn btn-secondary me-2"
                             onClick={() => { setShowModal((curr) => curr = curr ? false : true) }}
-                        >Elimina Task <FileX2 />
+                        >Elimina Task <FileX />
                         </button>
                         <Modal  {...modalProps} />
                         <EditTaskModal {...editModalTask} />
