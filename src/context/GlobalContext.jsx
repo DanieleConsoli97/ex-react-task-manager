@@ -5,8 +5,6 @@ const GlobalContext = createContext()
 
 function GlobalProvider({ children }) {
 
-  
-
     const dataTask = useTask()
 
     //NOTE - Export value

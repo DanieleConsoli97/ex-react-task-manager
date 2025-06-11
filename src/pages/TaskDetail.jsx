@@ -45,26 +45,28 @@ const TaskDetail = () => {
             {singleTask === undefined && <p>Nessuna task trovata.</p>}
             {singleTask && Task.length === 0 && <p>Nessuna task trovata</p>}
             {singleTask && singleTask?.id && (
-                <div class="card text-center mt-5">
+                <div className="card text-center mt-5">
                     <div className="card-header">
                         {singleTask.title}
                     </div>
-                    <div className="card-body py-5">
+                    <div className="card-body py-4">
+                        <p className="card-header">Destrizione</p>
                         <p className="card-text">{singleTask.description}</p>
+                        <p className="card-header">Stato</p>
                         <p className="card-text">{singleTask.status}</p>
+                        <p className="card-header">Data di creazione</p>
                         <p>{dayjs(singleTask.createdAt).format('DD/MM/YYYY')}</p>
                         <button
                             className="btn btn-secondary me-2"
                             onClick={() => { setShowModal((curr) => curr = curr ? false : true) }}
                         >Elimina Task <FileX2 />
-                        </button>  
+                        </button>
                         <Modal  {...modalProps} />
                         <EditTaskModal {...editModalTask} />
                     </div>
 
                 </div>
             )}
-          
         </div>
     )
 }

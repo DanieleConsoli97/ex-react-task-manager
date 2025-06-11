@@ -12,7 +12,7 @@ function App() {
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<TaskList />} />
             <Route path="/addTask" element={<AddTask />} />
-            <Route path="/Task/:id" element={<TaskDetail/>} />
+            <Route path="/Task/:id" element={<TaskDetail />} />
           </Route>
         </Routes>
       </GlobalProvider>

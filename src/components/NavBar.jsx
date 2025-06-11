@@ -1,10 +1,12 @@
 import { AppWindow, FolderPlus } from "lucide-react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 function NavBar() {
 
     return (
         <nav className="navbar navbar-expand bg-dark nav-underline nav-fill p-4" data-bs-theme="dark">
             <div className="container-fluid">
+                <a className="navbar-brand">React TaskManager</a>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav">
                         <li className="nav-item fs-3">
@@ -21,7 +23,6 @@ function NavBar() {
                             >Add Task <FolderPlus />
                             </NavLink>
                         </li>
-
                     </ul>
                 </div>
             </div>

@@ -24,12 +24,15 @@ npm run start
 ```
 
 Dopo qualche secondo, nel terminale apparirà un messaggio simile a:
-```
+
+```bash
 ✅ Server in ascolto su http://localhost:3001
 ```
+
 Questo URL dovrà essere utilizzato per configurare il frontend.
 
 ### Impostiamo il frontend:
+
 1. Creiamo il progetto con Vite.
 2. Installiamo react-router-dom nel progetto.
 3. Creiamo il router principale in App.jsx utilizzando BrowserRouter.
@@ -40,6 +43,7 @@ Questo URL dovrà essere utilizzato per configurare il frontend.
 6. Definire le rotte con Routes e Route, associando ogni percorso alla rispettiva pagina.
 
 ## 📌 Milestone 2 - Setup Context API e Fetch Iniziale
+
 Creare un contesto globale per la gestione dei dati e recuperare la lista dei task dall'API.
 
 1. Salvare l'URL dell'API nel file .env del progetto frontend:
@@ -57,6 +61,7 @@ Creare un contesto globale per la gestione dei dati e recuperare la lista dei ta
 6. Rendere disponibile il GlobalContext.Provider in App.jsx, avvolgendo l'intera applicazione.
 
 ## 📌 Milestone 3 - Lista dei Task (Pagina)
+
 Visualizzare l'elenco dei task in una tabella e ottimizzare il rendering con React.memo().
 
 1. Recuperare la lista dei task dal GlobalContext e mostrarla nella pagina TaskList.jsx.
@@ -73,6 +78,7 @@ Visualizzare l'elenco dei task in una tabella e ottimizzare il rendering con Rea
 5. Utilizzare React.memo() su TaskRow.jsx per ottimizzare le prestazioni ed evitare render inutili.
 
 ## 📌 Milestone 4 - Creazione del Custom Hook useTasks() (GET)
+
 Creare un custom hook per centralizzare la gestione dei task e semplificare l'accesso ai dati.
 
 1. Creare un hook useTasks() che recupera i task iniziali con una richiesta GET a /tasks e li memorizza in uno stato locale (useState).
@@ -84,6 +90,7 @@ Creare un custom hook per centralizzare la gestione dei task e semplificare l'ac
 4. Integrare useTasks() nel GlobalContext, in modo che tutti i componenti possano accedere ai task e alle funzioni di gestione.
 
 ## 📌 Milestone 5 - Creazione del Form per Aggiungere un Task
+
 Creare un form per aggiungere un task, senza ancora inviare i dati all'API.
 
 1. Aggiornare la pagina AddTask.jsx per contenere un form con i seguenti campi:
@@ -96,6 +103,7 @@ Creare un form per aggiungere un task, senza ancora inviare i dati all'API.
    - Non può contenere simboli speciali.
    - Se il valore è errato, mostrare un messaggio di errore.
    - Utilizzare una costante con i caratteri vietati:
+
      ```js
      const symbols = "!@#$%^&*()-_=+[]{}|;:'\\",.<>?/~";
      ```
@@ -104,6 +112,7 @@ Creare un form per aggiungere un task, senza ancora inviare i dati all'API.
    - Al click del bottone "Aggiungi Task", il form deve SOLO stampare in console l’oggetto task con i valori inseriti (NON deve ancora essere inviata la richiesta all’API).
 
 ## 📌 Milestone 6 - Integrazione dell'API per Aggiungere un Task (POST)
+
 Collegare il form di AddTask all'API e completare la funzione addTask in useTasks().
 
 1. Completare la funzione addTask in useTasks():
@@ -111,13 +120,17 @@ Collegare il form di AddTask all'API e completare la funzione addTask in useTask
    - Effettuare una chiamata API POST /tasks, inviando l’oggetto como body in formato JSON.
    - La chiamata API restituisce un oggetto con la seguente struttura:
      - In caso di successo:
+
        ```json
        { success: true, task: /* la task creata */ }
        ```
+
      - In caso di errore:
+
        ```json
        { success: false, message: "Messaggio di errore" }
        ```
+
    - La funzione addTask deve controllare il valore di success nella risposta:
      - Se success è true, aggiornare lo stato globale aggiungendo la nuova task.
      - Se success è false, lanciare un errore con message come testo.
@@ -131,6 +144,7 @@ Collegare il form di AddTask all'API e completare la funzione addTask in useTask
      - Mostrare un alert con il messaggio di errore ricevuto.
 
 ## 📌 Milestone 7 - Creazione della Pagina Dettaglio Task
+
 Creare la pagina TaskDetail.jsx, che visualizza i dettagli di un task.
 
 1. Aggiornare TaskRow.jsx
@@ -147,6 +161,7 @@ Creare la pagina TaskDetail.jsx, che visualizza i dettagli di un task.
    - Un bottone "Elimina Task", che per ora stampa solo "Elimino task" in console.
 
 ## 📌 Milestone 8 - Funzione di Eliminazione Task (DELETE)
+
 Aggiungere la funzionalità di eliminazione di un task con una chiamata API e aggiornare lo stato.
 
 1. Completare la funzione removeTask in useTasks():
@@ -159,12 +174,14 @@ Aggiungere la funzionalità di eliminazione di un task con una chiamata API e ag
 ```
 
 - In caso di errore:
+
 ```json
        { success: false, message: "Messaggio di errore" }
 ```
-   - La funzione removeTask deve controllare il valore di success nella risposta:
-     - Se success è true, rimuovere il task dallo stato globale.
-     - Se success è false, lanciare un errore con message come testo.
+
+- La funzione removeTask deve controllare il valore di success nella risposta:
+  - Se success è true, rimuovere il task dallo stato globale.
+  - Se success è false, lanciare un errore con message come testo.
 
 2. Gestire l'eliminazione della task in TaskDetail.jsx:
    - Al click su "Elimina Task", chiamare removeTask passando l'id del task.
@@ -194,14 +211,14 @@ Creare un componente Modal riutilizzabile e utilizzarlo per confermare l’elimi
    - Se l’utente conferma, vengono eseguite le stesse operazioni della Milestone 8.
 
 ## 📌 Milestone 10 - Modale e Funzione di Modifica Task (PUT)
+
 Creare una modale per modificare i dettagli di un task e aggiornare i dati tramite API.
 
 1. Completare la funzione updateTask in useTasks():
    - La funzione deve ricevere un oggetto updatedTask e effettuare una chiamata API PUT /tasks/:id.
    - La chiamata API restituisce un oggetto con la seguente struttura:
-     
      - In caso di successo:
-       
+
        ```json
        { success: true, task: /* la task aggiornata */ }
        ```
@@ -267,6 +284,7 @@ Implementare un sistema di ordinamento nella tabella delle task, permettendo all
    - Applicare sortOrder per definire se l’ordine è crescente o decrescente.
 
 ## 📌 Milestone 12 - Ricerca dei Task con Debounce
+
 Aggiungere un campo di ricerca che permette all’utente di filtrare i task in base al nome, ottimizzando le prestazioni con debounce.
 
 1. Creare un input di ricerca controllato
@@ -287,6 +305,7 @@ Il debounce non funziona bene sugli input controllati.
 Rimuovere value dall’input, rendendolo non controllato, affinché il debounce possa funzionare correttamente.
 
 ## 🎯 BONUS 1 - Selezione ed Eliminazione Multipla di Task
+
 Implementare un sistema di multi-selezione e cancellazione di Task.
 
 1. Modificare TaskRow.jsx per supportare la selezione
@@ -318,13 +337,15 @@ Implementare un sistema di multi-selezione e cancellazione di Task.
      - Mostrare un alert con il messaggio di errore ricevuto.
 
 ## 🎯 BONUS 2 - Funzionalità Aggiuntive
+
 Aggiungere funzionalità di personalizzazione, formattazione, validazione e centralizzazione dello stato.
 
 1. Usare dayjs per formattare le date in formato italiano (DD/MM/YYYY)
    - Installare dayjs con il comando:
-     ```bash
+
+   ```bash
      npm install dayjs
-     ```
+   ```
    - Modificare TaskRow.jsx e TaskDetail.jsx per visualizzare la data formattata in formato italiano (DD/MM/YYYY).
 
 2. Aggiornare addTask e updateTask in useTasks.js in modo che:

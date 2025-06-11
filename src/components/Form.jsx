@@ -39,7 +39,7 @@ const Form = ({ taskName, handleChange, onClickFunction, selectRef, textRef }) =
                     <option className="bg-warning-subtle" value="Doing">Doing</option>
                     <option className="bg-success-subtle" value="Done">Done</option>
                 </select>
-                <button className="btn btn-secondary mt-4 fs-3" type="submit">Aggiungi Task <FilePlus2 /></button>
+                <button disabled={!taskName.trim()} className="btn btn-secondary mt-4 fs-3" type="submit">Aggiungi Task <FilePlus2 /></button>
             </div>
 
         </form>

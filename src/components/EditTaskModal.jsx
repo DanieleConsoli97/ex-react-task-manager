@@ -20,13 +20,11 @@ const EditTaskModal = (props) => {
         }
     }, [task]);
 
-
     const formRef = useRef()
 
     const form = (<>
         <form ref={formRef} onSubmit={(e) => {
             e.preventDefault()
-
             const obj = {
                 title: title,
                 description: description,
@@ -58,8 +56,6 @@ const EditTaskModal = (props) => {
         </form>
     </>)
 
-
-
     const modalProps = {
         title: (
             <h1 className="d-flex align-items-center justify-content-center gap-2">
@@ -80,7 +76,6 @@ const EditTaskModal = (props) => {
     return (
         <>
             <button className="btn btn-secondary ms-2" onClick={onClose}> Modifica Task <FilePenLine /></button>
-
 
             {show && (
                 <Modal {...modalProps} />

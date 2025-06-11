@@ -7,8 +7,8 @@ const useTask = () => {
 
     const [Task, SetTask] = useState([])
 
-    //NOTE - fetch tasks
 
+    //FUNCTION - fetch tasks
     const fetchData = async () => {
         try {
             const response = await fetch(`${BASE_URL}/tasks`);
