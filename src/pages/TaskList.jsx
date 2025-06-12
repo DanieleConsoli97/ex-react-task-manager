@@ -2,15 +2,17 @@ import { memo, useCallback, useMemo, useState } from "react"
 import { useGlobalContext } from "../context/GlobalContext"
 import TaskRow from "../components/TaskRow"
 import { Dock, FileClock, FileSearch, ListTree } from "lucide-react"
+//NOTE - importante se crei il memo di un componente in questo modo ricordati che va messo fuori dal componente perchè altrimenti non ha effetto il memo
+const TaskRowMemo = memo(TaskRow)
 
 const TaskList = () => {
-
   const value = useGlobalContext()
   const { Task } = value
   const [sortBy, setSortBy] = useState("createdAt")
   const [sortOrder, setSortOrder] = useState(1)
-  const TaskRowMemo = memo(TaskRow)
+  
   const [searchQuery, SetSearchQuery] = useState("")
+  
 
   const handleSort = (type) => {
     if (sortBy === type) {
@@ -25,7 +27,7 @@ const TaskList = () => {
 
   const handleChange = (e) => {
 
-    SetSearchQuery(() => e.target.value)
+    SetSearchQuery(e.target.value)
 
   }
 
@@ -114,6 +116,7 @@ const TaskList = () => {
           </div>
         </div>)
       }
+    
     </>
   )
 }
